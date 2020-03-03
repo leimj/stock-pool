@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div id="app" class="container">
+  <div class="header">
+    <img src="images/logo.png"/>  
+  </div>
+  <template>
+	  <el-button type="text" @click="open">添加股票</el-button>
+	</template>
+    <template>
+	  <el-table
+		ref="multipleTable"
+		:data="stocks"
+		tooltip-effect="dark"
+		style="width: 100%"
+		@selection-change="handleSelectionChange">
+		<el-table-column
+		  type="selection"
+		  width="55">
+		</el-table-column>
+		<el-table-column
+		  label="代码"
+		  >
+		  <template slot-scope="scope">{{ scope.row.stock }}</template>
+		</el-table-column>
+		<el-table-column label="操作">
+		  <template slot-scope="scope">
+			<el-button
+			  size="mini"
+			  type="danger"
+			  @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+		  </template>
+		</el-table-column>
+	  </el-table>
+	  <div style="margin-top: 20px">
+		<el-button type="danger" :disabled="this.multipleSelection.length === 0" @click="deleteSelection()">删除选中</el-button>
+		<el-button :disabled="this.multipleSelection.length === 0" @click="exports()">导出选中</el-button>
+	  </div>
+	</template>
+  </div>
+</body>
+  <!-- import Vue before Element -->
+  <script src="vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="index.js"></script>
+  <script src="jsonToExcel.min.js"></script>
+  
+</html>
+
+
+
+
+
+
+
